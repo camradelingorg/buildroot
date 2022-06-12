@@ -1,0 +1,14 @@
+[Unit]
+Description=Hostapd IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator
+Wants=network.target
+After=sys-subsystem-net-devices-wlan_int.device network.target sshd.service rc-local.service
+
+[Service]
+Type=simple
+ExecStart=/sbin/start-stop-daemon -S -x /sbin/hostapd -- /etc/hostapd.conf
+ExecStop=/sbin/start-stop-daemon -K -x /sbin/hostapd --signal INT
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

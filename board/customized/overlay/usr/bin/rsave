@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+FILENAME=${1}
+DIRNAME=$(dirname ${FILENAME})
+echo "DIRNAME == ${DIRNAME}"
+echo "PWD == ${PWD}"
+if [[ ${DIRNAME:0:1} == "/" ]]; then
+        rsync ${FILENAME} /lower/${FILENAME}
+else
+        rsync ${FILENAME} /lower/${PWD}/${FILENAME}
+fi

@@ -1,0 +1,4 @@
+#file /etc/ppp/modems/iRZ_TU32
+#file /etc/ppp/peers/MTC
+
+file /etc/ppp/modems/sim7100

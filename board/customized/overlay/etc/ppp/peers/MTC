@@ -1,0 +1,3 @@
+user mts
+password mts
+connect "/usr/sbin/chat -v -t15 -f /etc/ppp/peers/MTC-connect.chat"

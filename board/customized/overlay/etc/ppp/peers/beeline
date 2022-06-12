@@ -1,0 +1,4 @@
+file /etc/ppp/modems/sim7100
+user mts
+password mts
+connect "/usr/sbin/chat -v -t15 -f /etc/ppp/peers/mts-connect.chat"

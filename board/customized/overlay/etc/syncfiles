@@ -1,0 +1,9 @@
+dnsmasq.conf
+hostapd.conf
+hostname
+ifplugd.vars
+machine-id
+network
+openvpn
+resolv.conf
+wpa_supplicant.conf
