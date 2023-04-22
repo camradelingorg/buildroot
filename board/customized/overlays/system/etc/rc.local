@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR=/etc/scripts
 chown -R www-data:www-data /var/www
 chown root:admin /sbin/reboot
 chown root:admin /usr/bin/systemctl
@@ -33,8 +34,15 @@ if [ -f /etc/recovery_partitions_check.sh ]; then
         /etc/recovery_partitions_check.sh
 fi
 
-if [ -f /etc/tuning.sh ]; then
-        /etc/tuning.sh
+for entry in ${SCRIPT_DIR}/*.sh
+do
+        echo "INFO: run script: '${entry}'"
+        ${entry}
+done
+
+if [[ $NEEDREBOOT == "ON" ]]; then
+        echo "INFO: reboot"
+        reboot
 fi
 
 exit 0

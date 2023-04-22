@@ -1,18 +1,21 @@
 #!/bin/bash
+source ${PWD}/board/customized/scripts/functions.inc
+
+STARTUSB_FILE=../startUsb.service
+STARTUSB_LINK=${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/startUsb.service
 TARGET_DIR=${1}
+
+## start
+
+delete_file_silent $STARTUSB_LINK
 ############### usb device otg ##############################################
-if [[ -z ${USB_DEVICE_SCRIPT} ]]; then
-        rm ${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/startUsb.service > /dev/null 2>&1
-        echo "INFO: variable USB_DEVICE_SCRIPT is not set"
-elif [[ "${USB_DEVICE_SCRIPT}" == "ON" ]] || [[ "${USB_DEVICE_SCRIPT}" == "on" ]]; then
-        rm ${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/startUsb.service > /dev/null 2>&1
-        ln -s ../startUsb.service ${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/startUsb.service
-        echo "INFO: block \"usb device otg\" is ON"
-elif    [[ "${USB_DEVICE_SCRIPT}" == "OFF" ]] || [[ "${USB_DEVICE_SCRIPT}" == "off" ]]; then
-        rm ${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/startUsb.service > /dev/null 2>&1
-	echo "INFO: block \"usb_device_otg\" is OFF"
+if [[ -z ${USB_DEVICE_SCRIPT} ]] || [[ "${USB_DEVICE_SCRIPT}" == "OFF" ]]; then
+        print_red "INFO: startUsb.service is OFF"
+elif [[ "${USB_DEVICE_SCRIPT}" == "ON" ]]; then
+        create_link $STARTUSB_FILE $STARTUSB_LINK
+        print_green "INFO: block \"usb device otg\" is ON"
 else
-        echo "ERROR: USB_DEVICE_SCRIPT=${USB_DEVICE_SCRIPT}. Only ON or OFF"
-        exit 1
+        print_red "ERROR: USB_DEVICE_SCRIPT=${USB_DEVICE_SCRIPT}. Only ON or OFF"
+        exit 2
 fi
 
