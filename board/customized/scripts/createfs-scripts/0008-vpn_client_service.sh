@@ -31,17 +31,17 @@ else
 fi
 
 # Если VPN_CLIENT_ON - создаем символическую ссылку на сервис
-if [[ -z ${VPN_CLIENT_ON} ]]; then
-	print_green "INFO: variable VPN_CLIENT_ON is not set"
+if [[ -z ${VPN_CLIENT} ]]; then
+	print_green "INFO: variable VPN_CLIENT is not set"
 	exit 0
-elif [[ "${VPN_CLIENT_ON}" == "yes" ]] || [[ "${VPN_CLIENT_ON}" == "YES" ]]; then
+elif [[ "${VPN_CLIENT}" == "ON" ]]; then
 	ln -s ../openvpn@client.service ${TARGET_DIR}/etc/systemd/system/multi-user.target.wants/openvpn@client.service
 	print_green "INFO: link for openvpn@client.service created"
 	exit 0
-elif [[ "${VPN_CLIENT_ON}" == "no" ]] || [[ "${VPN_CLIENT_ON}" == "NO" ]]; then
-	print_green "INFO: VPN_CLIENT_ON is NO"
+elif [[ "${VPN_CLIENT}" == "OFF" ]]; then
+	print_green "INFO: VPN_CLIENT is OFF"
 else
-	print_red "ERROR: VPN_CLIENT_ON=${VPN_CLIENT_ON}. ERROR! only YES or NO"
+	print_red "ERROR: VPN_CLIENT=${VPN_CLIENT}. ERROR! only ON or OFF"
 	exit 1
 fi
 exit 0
