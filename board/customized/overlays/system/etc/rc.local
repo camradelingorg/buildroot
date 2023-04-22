@@ -1,5 +1,9 @@
 #!/bin/bash
+
+source /etc/system.vars
+
 SCRIPT_DIR=/etc/scripts
+
 chown -R www-data:www-data /var/www
 chown root:admin /sbin/reboot
 chown root:admin /usr/bin/systemctl
