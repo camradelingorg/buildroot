@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z ${USB_GADGET_DEVICE} || ${USB_GADGET_DEVICE} == "OFF" ]; then
+if [ -z ${USB_GADGET_DEVICE} ] || [ ${USB_GADGET_DEVICE} == "OFF" ]; then
 	exit 0
 fi
 
@@ -22,7 +22,7 @@ mkdir -p configs/c.1/strings/0x409
 echo "Charge Manager 3.0" > strings/0x409/product
 
 ############################################################
-if [ ! -z ${USB_RNDIS} && ${USB_RNDIS} == "ON" ]; then
+if [ ! -z ${USB_RNDIS} ] && [ ${USB_RNDIS} == "ON" ]; then
 	mkdir -p functions/rndis.usb0
 	# set up mac address of remote device
 	echo "42:63:65:13:34:56" > functions/rndis.usb0/host_addr
@@ -39,7 +39,7 @@ if [ ! -z ${USB_RNDIS} && ${USB_RNDIS} == "ON" ]; then
 	ln -s configs/c.1 os_desc
 fi
 ###################### mass storage ########################
-if [ ! -z ${USB_MASS_STORAGE} && ${USB_MASS_STORAGE} == "ON" ]; then
+if [ ! -z ${USB_MASS_STORAGE} ] && [ ${USB_MASS_STORAGE} == "ON" ]; then
 	mkdir -p functions/mass_storage.usb0
 	echo 1 > functions/mass_storage.usb0/stall # allow bulk EPs
 	echo 0 > functions/mass_storage.usb0/lun.0/cdrom # don't emulate CD-ROm
@@ -62,7 +62,7 @@ echo $UDC_DRIVER > UDC
 #ln -s functions/mass_storage.usb0 configs/c.1/
 #echo "0x00" > bDeviceClass
 #echo $UDC_DRIVER > UDC
-if [ ! -z ${USB_RNDIS} && ${USB_RNDIS} == "ON" ]; then
+if [ ! -z ${USB_RNDIS} ] && [ ${USB_RNDIS} == "ON" ]; then
 	sleep 0.2
 	. /etc/profile.d/usbaddr.sh
 	ifconfig usb0 ${USB_ADDR} up

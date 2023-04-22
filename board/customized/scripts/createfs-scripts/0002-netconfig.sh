@@ -98,24 +98,6 @@ else
 	exit 2
 fi
 
-if [[ -z "${RASPBERRY_WIFI}" ]] || [[ "${RASPBERRY_WIFI}" == "OFF" ]]; then
-	print_red "INFO: RASPBERRY_WIFI is OFF"
-elif [[ "${RASPBERRY_WIFI}" == "ON" ]]; then
-	set_space "auto" "wlan_int" ${FILENAME}
-	set_space "iface wlan_int" "inet static" ${FILENAME}
-	if [[ -z "${RASPBERRY_WIFI_ADDRESS}" ]]; then
-       		RASPBERRY_WIFI_ADDRESS="192.168.1.1"
-       	fi
-	set_space "  address" ${RASPBERRY_WIFI_ADDRESS} ${FILENAME}
-	if [[ -z "${RASPBEERY_WIFI_NETMASK}" ]]; then
-		RASPBEERY_WIFI_NETMASK="255.255.255.0"
-	fi
-	set_space "  netmask" ${RASPBEERY_WIFI_NETMASK} ${FILENAME}
-else
-	print_red "ERROR! RASPBERRY_WIFI=${RASPBERRY_WIFI}. Only ON or OFF. Exit"
-	exit 2
-fi
-
 if [[ -z "${ADDITIONAL_STATIC_IPADDR}" ]] || [[ $ADDITIONAL_STATIC_IPADDR == "OFF" ]]; then
 	print_red "INFO: variable ADDITIONAL_STATIC_IPADDR is OFF"
 else
