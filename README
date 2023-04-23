@@ -24,3 +24,8 @@ You can also find us on #buildroot on OFTC IRC.
 
 If you would like to contribute patches, please read
 https://buildroot.org/manual.html#submitting-patches
+
+Customizations
+
+The difference of this repo and original one is that here some customizations are made for some specific targets.
+Check them out in output_orangepi directory
