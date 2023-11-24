@@ -4,7 +4,8 @@ source ${PWD}/board/customized/scripts/functions.inc
 
 TARGET_DIR=${1}
 AUTH_KEY_FILE=${TARGET_DIR}/root/.ssh/authorized_keys
-echo "" > ${AUTH_KEY_FILE}
+mkdir -p "${TARGET_DIR}/root/.ssh" &&
+touch ${AUTH_KEY_FILE}
 
 #IFS=' ' 
 read -r -a array <<< "${SSH_KEY_FILES_LIST}"
