@@ -12,4 +12,4 @@ if [ -z $ENVVARS ]; then
 else
 	source $ENVVARS
 fi
-make
+make -j8
