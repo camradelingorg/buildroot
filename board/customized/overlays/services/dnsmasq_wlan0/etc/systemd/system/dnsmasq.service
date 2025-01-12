@@ -1,7 +1,7 @@
 [Unit]
 Description=dnsmasq
 Wants=network.target
-After=sys-subsystem-net-devices-wlan_int.device network.target sshd.service rc-local.service
+After=sys-subsystem-net-devices-wlan0.device network.target sshd.service rc-local.service
 
 [Service]
 Type=simple

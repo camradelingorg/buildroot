@@ -1,7 +1,7 @@
 [Unit]
 Description=Hostapd IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator
 Wants=network.target
-After=sys-subsystem-net-devices-wlan_int.device network.target sshd.service rc-local.service
+After=sys-subsystem-net-devices-wlan0.device network.target sshd.service rc-local.service
 
 [Service]
 Type=simple

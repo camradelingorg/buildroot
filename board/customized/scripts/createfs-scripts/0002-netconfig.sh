@@ -6,7 +6,7 @@ TARGET_DIR=${1}
 FILENAME="${TARGET_DIR}/etc/network/interfaces"
 DNSFILE="${TARGET_DIR}/etc/resolv.conf"
 
-## переменная DEVICE_IFACE берется из vars файла
+## variable DEVICE_IFACE is taken from .vars file
 FULL_PATH="${TARGET_DIR}/etc/systemd/system/multi-user.target.wants"
 
 create_dir ${FULL_PATH}
