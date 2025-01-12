@@ -1,5 +1,5 @@
 [Unit]
-Description=wpa_supplicant
+Description=dhclient_wlan0
 Wants=network.target
 After=sys-subsystem-net-devices-wlan0.device network.target sshd.service rc-local.service
 

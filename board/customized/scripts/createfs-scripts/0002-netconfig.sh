@@ -13,9 +13,6 @@ create_dir ${FULL_PATH}
 
 IFPLUGD_IFACE0_LINK="${FULL_PATH}/ifplugd@${DEVICE_IFACE}.service"
 IFPLUGD_ETH01_LINK="${FULL_PATH}/ifplugd@${DEVICE_IFACE}:1.service"
-IFPLUGD_ETH02_LINK="${FULL_PATH}/ifplugd@${DEVICE_IFACE}:2.service"
-IFPLUGD_ETH03_LINK="${FULL_PATH}/ifplugd@${DEVICE_IFACE}:3.service"
-IFPLUGD_ETH04_LINK="${FULL_PATH}/ifplugd@${DEVICE_IFACE}:4.service"
 IFPLUGD_ETH1_LINK="${FULL_PATH}/ifplugd@${MODEM_IFACE}.service"
 IFPLUGD_SERVICE="../ifplugd@.service"
 
@@ -23,9 +20,6 @@ IFPLUGD_SERVICE="../ifplugd@.service"
 # Удаляем все ссылки, которые можем создать (при наличии этих переменных)
 delete_file_silent ${IFPLUGD_IFACE0_LINK}
 delete_file_silent ${IFPLUGD_ETH01_LINK}
-delete_file_silent ${IFPLUGD_ETH02_LINK}
-delete_file_silent ${IFPLUGD_ETH03_LINK}
-delete_file_silent ${IFPLUGD_ETH04_LINK}
 delete_file_silent ${FILENAME}
 delete_file_silent ${DNSFILE}
 delete_file_silent ${IFPLUGD_ETH1_LINK}
@@ -96,39 +90,6 @@ elif [[ "${DEVICE_DHCP_ADDR}" == "ON" ]]; then
 else
 	print_red "ERROR: DEVICE_DHCP_ADDR=${DEVICE_DHCP_ADDR}. only ON or OFF"
 	exit 2
-fi
-
-if [[ -z "${ADDITIONAL_STATIC_IPADDR}" ]] || [[ $ADDITIONAL_STATIC_IPADDR == "OFF" ]]; then
-	print_red "INFO: variable ADDITIONAL_STATIC_IPADDR is OFF"
-else
-	set_space "allow-hotplug" "eth0:2" ${FILENAME}
-        set_space "iface eth0:2" "inet static" ${FILENAME}
-        set_space "  address" ${ADDITIONAL_STATIC_IPADDR} ${FILENAME}
-        set_space "  netmask" ${ADDITIONAL_STATIC_NETMASK} ${FILENAME}
-	create_link $IFPLUGD_SERVICE $IFPLUGD_ETH02_LINK
-	print_green "INFO: additional static-ip done"
-fi
-
-if [[ -z "${ADDITIONAL_STATIC_IPADDR2}" ]] || [[ $ADDITIONAL_STATIC_IPADDR2 == "OFF" ]]; then
-	print_red "INFO: variable $ADDITIONAL_STATIC_IPADDR2 is OFF"
-else
-        set_space "allow-hotplug" "eth0:3" ${FILENAME}
-        set_space "iface eth0:3" "inet static" ${FILENAME}
-        set_space "  address" ${ADDITIONAL_STATIC_IPADDR2} ${FILENAME}
-        set_space "  netmask" ${ADDITIONAL_STATIC_NETMASK2} ${FILENAME}
-	create_link $IFPLUGD_SERVICE $IFPLUGD_ETH03_LINK
-        print_green "INFO: additional2 static-ip done"
-fi
-
-if [[ -z "${ADDITIONAL_STATIC_IPADDR3}" ]] || [[ $ADDITIONAL_STATIC_IPADDR3 == "OFF" ]]; then
-        print_red "INFO: variable $ADDITIONAL_STATIC_IPADDR3 is OFF"
-else
-        set_space "allow-hotplug" "eth0:4" ${FILENAME}
-        set_space "iface eth0:4" "inet static" ${FILENAME}
-        set_space "  address" ${ADDITIONAL_STATIC_IPADDR3} ${FILENAME}
-        set_space "  netmask" ${ADDITIONAL_STATIC_NETMASK3} ${FILENAME}
-	create_link $IFPLUGD_SERVICE $IFPLUGD_ETH04_LINK
-        print_green "INFO: additional3 static-ip done"
 fi
 
 print_green "INFO: netconfig.sh DONE"

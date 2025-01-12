@@ -1,5 +1,5 @@
 [Unit]
-Description=dnsmasq
+Description=gpsd
 Wants=network.target
 After=network.target sshd.service rc-local.service
 
