@@ -2573,4 +2573,8 @@ menu "Text editors and viewers"
 	source "package/vim/Config.in"
 endmenu
 
+menu "Extra"
+	source "package/rtl88XX-special/Config.in"
+endmenu
+
 endmenu
