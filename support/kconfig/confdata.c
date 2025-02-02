@@ -653,9 +653,7 @@ conf_write_heading(FILE *fp, struct conf_printer *printer, void *printer_arg)
 
 	snprintf(buf, sizeof(buf),
 	    "\n"
-	    "Automatically generated file; DO NOT EDIT.\n"
-	    "%s\n",
-	    rootmenu.prompt->text);
+	    "Automatically generated file; DO NOT EDIT.\n");
 
 	printer->print_comment(fp, buf, printer_arg);
 }
