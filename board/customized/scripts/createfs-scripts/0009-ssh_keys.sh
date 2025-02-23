@@ -5,6 +5,7 @@ source ${PWD}/board/customized/scripts/functions.inc
 TARGET_DIR=${1}
 AUTH_KEY_FILE=${TARGET_DIR}/root/.ssh/authorized_keys
 mkdir -p "${TARGET_DIR}/root/.ssh" &&
+rm ${AUTH_KEY_FILE}
 touch ${AUTH_KEY_FILE}
 
 #IFS=' ' 
